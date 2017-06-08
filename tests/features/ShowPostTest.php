@@ -20,6 +20,8 @@ class ShowPostTest extends TestCase
 
         $user->posts()->save($post);
 
+        dd(route('posts.show', $post));
+
         // When
         $this->visit(route('posts.show', $post))
             ->seeInElement('h1', $post->title)
