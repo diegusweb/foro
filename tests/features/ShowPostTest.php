@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ShowPostTest extends TestCase
+class ShowPostTest extends FeatureTestCase
 {
+    /**
+     *
+     */
     function test_a_user_can_see_the_post_details()
     {
         // Having
@@ -13,12 +13,13 @@ class ShowPostTest extends TestCase
             'name' => 'Duilio Palacios',
         ]);
 
-        $post = factory(\App\Post::class)->make([
+        $post = factory(\App\Post::class)->create([
             'title' => 'Este es el titulo del post',
-            'content' => 'Este es el contenido del post'
+            'content' => 'Este es el contenido del post',
+            'user_id' => $user->id
         ]);
 
-        $user->posts()->save($post);
+       //dd(\App\User::all()->toArray());
 
        // dd(route('posts.show', $post));
         //dd($post->url);
@@ -27,19 +28,21 @@ class ShowPostTest extends TestCase
         $this->visit($post->url)
             ->seeInElement('h1', $post->title)
             ->see($post->content)
-            ->see($user->name);
+            ->see('Duilio Palacios');
     }
 
     function test_old_urls_are_redirected()
     {
         // Having
         $user = $this->defaultUser();
-        $post = factory(\App\Post::class)->make([
+        $post = factory(\App\Post::class)->create([
             'title' => 'Old title',
         ]);
-        $user->posts()->save($post);
+
         $url = $post->url;
+
         $post->update(['title' => 'New title']);
+
         $this->visit($url)
             ->seePageIs($post->url);
     }
