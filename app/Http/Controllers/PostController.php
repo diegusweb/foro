@@ -10,9 +10,12 @@ class PostController extends Controller
     //
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('created_at', 'DESC')->paginate();
 
-        return view('posts.index', compact($posts));
+        //dd($posts->pluck('created_at')->toArray());
+
+        return view('posts.index', compact('posts'));
+
     }
 
     public function show(Post $post, $slug)
