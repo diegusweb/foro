@@ -30,6 +30,11 @@ class Post extends Model
         $this->attributes['slug'] = Str::slug($value);
     }
 
+    public function latestComments()
+    {
+        return $this->comments()->orderBy('created_at','DESC');
+    }
+
     public function getUrlAttribute()
     {
         return route('posts.show', [$this->id, $this->slug]);
