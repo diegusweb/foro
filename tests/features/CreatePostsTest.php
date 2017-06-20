@@ -6,6 +6,9 @@
  * Date: 6/3/2017
  * Time: 9:47 AM
  */
+
+use App\Post;
+
 class CreatePostsTest extends FeatureTestCase
 {
 
@@ -33,8 +36,17 @@ class CreatePostsTest extends FeatureTestCase
             'slug' => 'esta-es-una-pregunta',
         ]);
 
+        $post = Post::first();
+
+        //Test the autor is suscribed automatically to the post
+        $this->seeInDatabase('subscriptions',[
+            'user_id' => $user->id,
+            'post_id' => $post->id
+        ]);
+
         //Test a user is redirect to the posts details after creating it.
-        $this->see($title);
+       // $this->see($title);
+        $this->seePageIs($post->url);
 
     }
 
