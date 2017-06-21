@@ -13,6 +13,8 @@ class WriteCommentTest extends FeatureTestCase
      */
     public function test_a_user_can_write_a_comment()
     {
+        \Illuminate\Support\Facades\Notification::fake();
+
         $post = $this->createPost();
 
         $user = $this->defaultUser();
