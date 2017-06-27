@@ -30,7 +30,7 @@ class RegistrationTest extends FeatureTestCase
         ]);
 
         $user = User::first();
-        
+
         $this->seeInDatabase('tokens', [
             'user_id' => $user->id
         ]);
@@ -42,7 +42,7 @@ class RegistrationTest extends FeatureTestCase
         Mail::assertSentTo($user, TokenMail::class, function ($mail) use ($token) {
             return $mail->token->id == $token->id;
         });
-        
+
         //todo: finish this feature!
         return;
         $this->seeRouteIs('register_confirmation')

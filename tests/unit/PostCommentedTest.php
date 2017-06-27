@@ -20,7 +20,8 @@ class PostCommentedTest extends TestCase
         ]);
 
         $author = new User([
-            'name' => 'Diego Rueda'
+            'last_name' => 'Diego',
+            'first_name' => 'Rueda'
         ]);
 
         $comment = new Comment();
@@ -44,7 +45,7 @@ class PostCommentedTest extends TestCase
         );
 
         $this->assertSame(
-            'Diego Rueda escribio un comentario en: Titulo del post',
+            'Rueda Diego escribio un comentario en: Titulo del post',
             $message->introLines[0]
         );
 
