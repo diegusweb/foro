@@ -21,7 +21,7 @@ class PostIntegrationTest extends TestCase
             'como-instalar-laravel',
             $post->fresh()->slug
         );
-        
+
         /*
                 $this->seeInDatabase('posts', [
                     'slug' => 'como-instalar-laravel'
