@@ -13,21 +13,21 @@ class PostIntegrationTest extends TestCase
     public function test_a_slug_is_genrated_and_saved_to_the_database()
     {
 
-        $post = factory(Post::class)->create([
-            'title' => 'Como instalar laravel'
+        $post = $this->createPost([
+            'title' => 'Como instalar Laravel',
         ]);
 
-        //dd($post->toArray());
-
-        $this->seeInDatabase('posts',[
-            'slug' => 'como-instalar-laravel'
-        ]);
-
-        $this->assertSame('como-instalar-laravel', $post->slug);
-
-        /*$this->assertSame(
+        $this->assertSame(
             'como-instalar-laravel',
             $post->fresh()->slug
-        );*/
+        );
+        
+        /*
+                $this->seeInDatabase('posts', [
+                    'slug' => 'como-instalar-laravel'
+                ]);
+                $this->assertSame('como-instalar-laravel', $post->slug);
+        */
+
     }
 }
